@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.company.agentcheck.web.screens.request">
+    <data>
+        <instance id="requestDc"
+                  class="com.company.agentcheck.entity.Request"
+                  view="_local">
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true" align="TOP_LEFT" width="100%">
+        <scrollBox id="scrollBox" spacing="true" width="100%">
+            <form id="form" dataContainer="requestDc" height="100%" width="100%">
+                <column width="400px">
+                    <lookupField id="celProverkiField" property="celProverki" width="100%"/>
+                    <lookupField id="vidProverkiField" property="vidProverki" width="100%"/>
+                    <textField id="directorField" property="director" width="100%"/>
+                    <textField id="jurAddressField" property="jurAddress" width="100%"/>
+                    <textField id="contractTypeField" property="contractType" width="100%"/>
+                    <textArea id="detailField" property="detail" rows="5" width="100%"/>
+                </column>
+                <column width="400px">
+                    <textField id="agentNameField" property="agentName" width="100%"/>
+                    <textField id="agentCodeField" property="agentCode" width="100%"/>
+                    <textField id="countryField" property="country" width="100%"/>
+                    <textField id="factAddressField" property="factAddress" width="100%"/>
+                    <textField id="contractSummField" property="contractSumm" width="100%"/>
+                </column>
+            </form>
+        </scrollBox>
+        <hbox id="editActions" spacing="true" align="TOP_LEFT">
+            <button action="windowCommitAndClose"/>
+            <button action="windowCommit"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

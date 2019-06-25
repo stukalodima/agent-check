@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://browseCaption"
+        focusComponent="requestsTable"
+        messagesPack="com.company.agentcheck.web.screens.request">
+    <data readOnly="true">
+        <collection id="requestsDc"
+                    class="com.company.agentcheck.entity.Request"
+                    view="_local">
+            <loader id="requestsDl">
+                <query>
+                    <![CDATA[select e from agentcheck_Request e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="requestsTable"
+            spacing="true">
+        <groupTable id="requestsTable"
+                    width="100%"
+                    dataContainer="requestsDc"
+                    presentations="true">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="refresh" type="refresh"/>
+                <action id="excel" type="excel"/>
+            </actions>
+            <columns>
+                <column id="celProverki"/>
+                <column id="vidProverki"/>
+                <column id="agentName"/>
+                <column id="agentCode"/>
+                <column id="country"/>
+                <column id="jurAddress"/>
+                <column id="factAddress"/>
+                <column id="director"/>
+                <column id="contractSumm"/>
+                <column id="contractType"/>
+                <column id="detail"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="requestsTable.create"/>
+                <button id="editBtn" action="requestsTable.edit"/>
+                <button id="removeBtn" action="requestsTable.remove"/>
+                <button id="refreshBtn" action="requestsTable.refresh"/>
+                <button id="excelBtn" action="requestsTable.excel"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
