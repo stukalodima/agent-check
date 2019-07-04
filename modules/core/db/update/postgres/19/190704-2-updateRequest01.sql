@@ -1,0 +1,1 @@
+create unique index IDX_AGENTCHECK_REQUEST_UK_NUMBER_ on AGENTCHECK_REQUEST (NUMBER_) where DELETE_TS is null ;

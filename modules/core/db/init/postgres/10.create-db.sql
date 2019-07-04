@@ -9,6 +9,9 @@ create table AGENTCHECK_REQUEST (
     DELETE_TS timestamp,
     DELETED_BY varchar(50),
     --
+    NUMBER_ varchar(9) not null,
+    DOC_DATE timestamp not null,
+    STATUS varchar(255),
     CEL_PROVERKI integer not null,
     VID_PROVERKI integer not null,
     AGENT_NAME varchar(255) not null,

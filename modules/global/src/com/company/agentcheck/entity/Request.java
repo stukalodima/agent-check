@@ -2,18 +2,30 @@ package com.company.agentcheck.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.cuba.security.entity.User;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.transaction.Transaction;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
-@NamePattern(" |")
+@NamePattern("%s - %s|number,agentName")
 @Table(name = "AGENTCHECK_REQUEST")
 @Entity(name = "agentcheck_Request")
 public class Request extends StandardEntity {
     private static final long serialVersionUID = 5727013000720594771L;
+
+    @NotNull
+    @Column(name = "NUMBER_", nullable = false, unique = true, length = 9)
+    protected String number;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @NotNull
+    @Column(name = "DOC_DATE", nullable = false)
+    protected Date docDate;
+
+    @Column(name = "STATUS")
+    protected String status;
 
     @NotNull
     @Column(name = "CEL_PROVERKI", nullable = false)
@@ -52,6 +64,30 @@ public class Request extends StandardEntity {
     @Lob
     @Column(name = "DETAIL")
     protected String detail;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Date getDocDate() {
+        return docDate;
+    }
+
+    public void setDocDate(Date docDate) {
+        this.docDate = docDate;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
     public String getDetail() {
         return detail;

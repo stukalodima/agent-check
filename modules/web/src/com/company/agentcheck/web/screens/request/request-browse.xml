@@ -18,10 +18,14 @@
                 width="800"/>
     <layout expand="requestsTable"
             spacing="true">
+        <filter id="filter"
+                applyTo="requestsTable"
+                dataLoader="requestsDl">
+            <properties include=".*"/>
+        </filter>
         <groupTable id="requestsTable"
                     width="100%"
-                    dataContainer="requestsDc"
-                    presentations="true">
+                    dataContainer="requestsDc">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
@@ -30,6 +34,9 @@
                 <action id="excel" type="excel"/>
             </actions>
             <columns>
+                <column id="number"/>
+                <column id="docDate"/>
+                <column id="status"/>
                 <column id="celProverki"/>
                 <column id="vidProverki"/>
                 <column id="agentName"/>
