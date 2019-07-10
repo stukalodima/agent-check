@@ -1,0 +1,1 @@
+drop table if exists AGENTCHECK_REQUEST_FILE_DESCRIPTOR_LINK__U40174 cascade ;

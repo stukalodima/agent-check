@@ -53,6 +53,7 @@ public class RequestEdit extends StandardEditor<Request> {
         procAttachmentsDl.load();
         procActionsFragment.initializer()
                 .standard()
+                .setAfterCompleteTaskListener(()->procTasksFrame.refresh())
                 .init(PROCESS_CODE, getEditedEntity());
 
 
@@ -79,7 +80,7 @@ public class RequestEdit extends StandardEditor<Request> {
     private void changeStartProcessBtnCaption() {
         StartProcessAction startProcessAction = procActionsFragment.getStartProcessAction();
         if (startProcessAction != null) {
-            startProcessAction.setCaption("Start process using ProcActionsFragment");
+            startProcessAction.setCaption("Отправить заявку на проверку");
         }
     }
 

@@ -28,16 +28,16 @@
                 <column width="100%">
                     <textField id="numberField" property="number"/>
                     <lookupField id="celProverkiField" property="celProverki"/>
-                    <textField id="agentNameField" property="agentName"/>
+                    <textField id="agentCodeField" property="agentCode"/>
                     <textField id="countryField" property="country"/>
                     <textField id="factAddressField" property="factAddress"/>
                     <textField id="contractTypeField" property="contractType"/>
-                    <textArea id="detailField" property="detail" rows="5"/>
+                    <textArea id="detailField" property="detail" rows="1"/>
                 </column>
                 <column width="100%">
                     <dateField id="docDateField" property="docDate"/>
                     <lookupField id="vidProverkiField" property="vidProverki"/>
-                    <textField id="agentCodeField" property="agentCode"/>
+                    <textField id="agentNameField" property="agentName"/>
                     <textField id="directorField" property="director"/>
                     <textField id="jurAddressField" property="jurAddress"/>
                     <textField id="contractSummField" property="contractSumm"/>

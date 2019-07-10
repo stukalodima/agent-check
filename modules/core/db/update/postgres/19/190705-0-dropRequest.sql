@@ -1,0 +1,2 @@
+alter table agentcheck_request rename to AGENTCHECK_REQUEST__U14223 ;
+alter table agentcheck_request_file_descriptor_link drop constraint FK_REQFILDES_ON_REQUEST ;
