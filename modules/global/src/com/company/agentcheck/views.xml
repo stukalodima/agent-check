@@ -2,4 +2,9 @@
 <views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
 
     <view entity="agentcheck_Request" name="request-view" extends="_local"/>
+    <view class="com.haulmont.bpm.entity.ProcInstance" name="procInstance-listener-view" extends="_local">
+        <property name="procDefinition" view="_minimal">
+            <property name="procRoles" view="_minimal"/>
+        </property>
+    </view>
 </views>

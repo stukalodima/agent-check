@@ -7,12 +7,15 @@ import com.haulmont.bpm.gui.action.StartProcessAction;
 import com.haulmont.bpm.gui.procactionsfragment.ProcActionsFragment;
 import com.haulmont.bpm.gui.proctask.ProcTasksFrame;
 import com.haulmont.cuba.core.app.UniqueNumbersService;
+import com.haulmont.cuba.core.global.DataManager;
+import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.app.core.file.FileDownloadHelper;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.model.InstanceLoader;
 import com.haulmont.cuba.gui.screen.*;
+import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import java.util.Date;
@@ -53,10 +56,15 @@ public class RequestEdit extends StandardEditor<Request> {
         procAttachmentsDl.load();
         procActionsFragment.initializer()
                 .standard()
-                .setAfterCompleteTaskListener(()->procTasksFrame.refresh())
+                .setAfterCompleteTaskListener(()->{
+                    procTasksFrame.refresh();
+                    procActionsFragment.getFragment().setVisible(false);
+                })
+                .setAfterStartProcessListener(()->{
+                    procTasksFrame.refresh();
+                    procActionsFragment.getFragment().setVisible(false);
+                })
                 .init(PROCESS_CODE, getEditedEntity());
-
-
 
         ProcInstance procInstance = procActionsFragment.getProcInstance();
         procTasksFrame.setProcInstance(procInstance);

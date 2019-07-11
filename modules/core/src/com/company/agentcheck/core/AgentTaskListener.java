@@ -5,6 +5,7 @@ import com.haulmont.cuba.core.app.EmailerAPI;
 import com.haulmont.cuba.core.global.*;
 import com.haulmont.cuba.security.entity.User;
 import org.activiti.engine.delegate.DelegateTask;
+import org.activiti.engine.delegate.Expression;
 import org.activiti.engine.delegate.TaskListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +16,13 @@ public class AgentTaskListener implements TaskListener {
 
     private static final Logger log = LoggerFactory.getLogger(AgentTaskListener.class);
 
+    private Expression emailSubject;
+    private Expression emailBody;
+
     @Override
     public void notify(DelegateTask delegateTask) {
+        String emailSubjectValue = (String) emailSubject.getValue(delegateTask);
+        String emailBodyValue = (String) emailBody.getValue(delegateTask);
         String assignee = delegateTask.getAssignee();
         EmailerAPI emailerAPI = AppBeans.get(EmailerAPI.class);
         DataManager dataManager = AppBeans.get(DataManager.class);
@@ -29,7 +35,11 @@ public class AgentTaskListener implements TaskListener {
             return;
         }
         try {
-            emailerAPI.sendEmail(user.getEmail(), "Email subject", "Email body");
+            EmailInfo emailInfo = new EmailInfo(user.getEmail(),emailSubjectValue,emailBodyValue);
+
+            emailInfo.setFrom("IT Service Management <ic.itil@smart-holding.com>");
+
+            emailerAPI.sendEmail(emailInfo);
         } catch (EmailException e) {
             log.error("Email sending error", e);
         }
