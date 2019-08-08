@@ -198,8 +198,9 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
 }
 
 task buildUberJar(type: CubaUberJarBuilding) {
+    useDefaultLogbackConfiguration = false
     coreJettyEnvPath = 'modules/core/web/META-INF/jetty-env.xml'
-    logbackConfigurationFile = 'etc/uber-jar-logback.xml'
+    logbackConfigurationFile = 'modules/global/src/logback.xml'
     singleJar = true
     appProperties = ['cuba.automaticDatabaseUpdate': true]
     webJettyConfPath = 'jetty.xml'
