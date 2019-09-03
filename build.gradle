@@ -1,6 +1,6 @@
 
 buildscript {
-    ext.cubaVersion = '7.0.7'
+    ext.cubaVersion = '7.1.0'
     repositories {
         maven {
             url 'https://dl.bintray.com/cuba-platform/main'
@@ -40,6 +40,7 @@ cuba {
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
     appComponent("com.haulmont.bpm:bpm-global:$cubaVersion")
+    appComponent("com.haulmont.reports:reports-global:$cubaVersion")
 }
 
 def postgres = 'org.postgresql:postgresql:42.2.5'

@@ -10,6 +10,7 @@ create table AGENTCHECK_REQUEST (
     DELETED_BY varchar(50),
     --
     NUMBER_ varchar(9) not null,
+    RESULT_ double precision,
     DOC_DATE timestamp not null,
     STATUS varchar(255),
     CEL_PROVERKI integer not null,

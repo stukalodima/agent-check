@@ -2,10 +2,8 @@ package com.company.agentcheck.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
-import com.haulmont.cuba.security.entity.User;
 
 import javax.persistence.*;
-import javax.transaction.Transaction;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -18,6 +16,9 @@ public class Request extends StandardEntity {
     @NotNull
     @Column(name = "NUMBER_", nullable = false, unique = true, length = 9)
     protected String number;
+
+    @Column(name = "RESULT_")
+    protected Double result;
 
     @Temporal(TemporalType.TIMESTAMP)
     @NotNull
@@ -64,6 +65,14 @@ public class Request extends StandardEntity {
     @Lob
     @Column(name = "DETAIL")
     protected String detail;
+
+    public Double getResult() {
+        return result;
+    }
+
+    public void setResult(Double result) {
+        this.result = result;
+    }
 
     public String getStatus() {
         return status;
