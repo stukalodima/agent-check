@@ -3,5 +3,6 @@
     <persistence-unit name="agentCheck" transaction-type="RESOURCE_LOCAL">
 
         <class>com.company.agentcheck.entity.Request</class>
+        <class>com.company.agentcheck.entity.Question</class>
     </persistence-unit>
 </persistence>

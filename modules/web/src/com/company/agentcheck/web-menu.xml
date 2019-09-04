@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
+    <menu id="Dictionary" insertAfter="reports">
+        <item screen="agentcheck_Question.browse"/>
+    </menu>
     <menu id="application-agentcheck" insertBefore="administration">
         <item screen="agentcheck_Request.browse"/>
     </menu>

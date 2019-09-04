@@ -14,6 +14,7 @@ import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.core.global.View;
 import com.haulmont.cuba.gui.app.core.file.FileDownloadHelper;
+import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.InstanceContainer;
@@ -22,6 +23,7 @@ import com.haulmont.cuba.gui.screen.*;
 import com.haulmont.cuba.gui.util.OperationResult;
 import com.haulmont.cuba.security.entity.User;
 import com.haulmont.cuba.security.global.UserSession;
+import com.haulmont.reports.gui.actions.EditorPrintFormAction;
 
 import javax.inject.Inject;
 import java.util.Date;
@@ -65,9 +67,12 @@ public class RequestEdit extends StandardEditor<Request> {
     private BpmEntitiesService bpmEntitiesService;
     @Inject
     private UserSession userSession;
+    @Inject
+    private Button reportButton;
 
     @Subscribe
     private void onBeforeShow(BeforeShowEvent event) {
+        reportButton.setAction(new EditorPrintFormAction("report", this, null));
         procFrameInit();
     }
 

@@ -30,8 +30,10 @@ public class AgentTaskListener implements TaskListener {
         Set<IdentityLink> users = delegateTask.getCandidates();
         EmailerAPI emailerAPI = AppBeans.get(EmailerAPI.class);
 
-        for (IdentityLink userIdent : users) {
-            UUID userId = UUID.fromString(userIdent.getUserId());
+        if (users.isEmpty()) {
+            String userStr = delegateTask.getAssignee();
+
+            UUID userId = UUID.fromString(userStr);
             User user = dataManager.load(LoadContext.create(User.class)
                     .setId(userId)
                     .setView(View.LOCAL));
@@ -47,6 +49,26 @@ public class AgentTaskListener implements TaskListener {
                 emailerAPI.sendEmail(emailInfo);
             } catch (EmailException e) {
                 log.error("Email sending error", e);
+            }
+        } else {
+            for (IdentityLink userIdent : users) {
+                UUID userId = UUID.fromString(userIdent.getUserId());
+                User user = dataManager.load(LoadContext.create(User.class)
+                        .setId(userId)
+                        .setView(View.LOCAL));
+                if (user == null || Strings.isNullOrEmpty(user.getEmail())) {
+                    log.error("Email for user {} is not defined", user);
+                    return;
+                }
+                try {
+                    EmailInfo emailInfo = new EmailInfo(user.getEmail(), emailSubjectValue, emailBodyValue);
+
+                    emailInfo.setFrom("IT Service Management <ic.itil@smart-holding.com>");
+
+                    emailerAPI.sendEmail(emailInfo);
+                } catch (EmailException e) {
+                    log.error("Email sending error", e);
+                }
             }
         }
     }
