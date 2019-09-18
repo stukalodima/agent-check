@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="linesTable"
+        messagesPack="com.company.agentcheck.web.screens.answer">
+    <data>
+        <instance id="answerDc"
+                  class="com.company.agentcheck.entity.Answer"
+                  view="answer-view-with-lines">
+            <loader/>
+            <collection id="linesDc" property="lines"/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="linesBox" spacing="true">
+        <form id="form" dataContainer="answerDc" width="100%">
+            <column width="100%">
+                <dateField id="docDateField" property="docDate" width="100%" editable="false"/>
+            </column>
+            <column width="100%">
+                <textField id="numberField" property="number" width="100%" editable="false"/>
+            </column>
+            <column width="100%">
+                <lookupField id="vidProverkiField" property="vidProverki" width="100%" editable="false"/>
+            </column>
+        </form>
+        <form id="form1" dataContainer="answerDc" width="100%">
+
+            <column width="100%">
+                <textField id="clientField" property="client" width="100%" editable="false"/>
+            </column>
+        </form>
+        <groupBox id="linesBox">
+            <table id="linesTable" dataContainer="linesDc" width="100%" editable="true">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="question"/>
+                    <column id="price" visible="false"/>
+                    <column id="value" editable="true"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="linesTable.create"/>
+                    <button action="linesTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

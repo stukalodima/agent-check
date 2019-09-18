@@ -1,0 +1,2 @@
+alter table AGENTCHECK_ANSWER add constraint FK_AGENTCHECK_ANSWER_ON_USER foreign key (USER_ID) references SEC_USER(ID);
+create index IDX_AGENTCHECK_ANSWER_ON_USER on AGENTCHECK_ANSWER (USER_ID);

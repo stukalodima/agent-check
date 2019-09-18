@@ -5,5 +5,6 @@
     </menu>
     <menu id="application-agentcheck" insertBefore="administration">
         <item screen="agentcheck_Request.browse"/>
+        <item screen="agentcheck_Answer.browse"/>
     </menu>
 </menu-config>

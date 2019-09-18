@@ -1,6 +1,7 @@
 package com.company.agentcheck.core;
 
 import com.company.agentcheck.entity.Request;
+import com.company.agentcheck.entity.RequestStatus;
 import com.haulmont.cuba.core.Persistence;
 import com.haulmont.cuba.core.Transaction;
 import com.haulmont.cuba.core.global.DataManager;
@@ -18,20 +19,12 @@ public class RequestHelper {
     @Inject
     private Persistence persistence;
 
-    @Inject
-    private DataManager dataManager;
-
-    @Inject
-    private Logger log;
-
-    @Inject
-    private Metadata metadata;
-
-    public void updateState(UUID entityId, String state) {
+    public void updateState(UUID entityId, int state) {
+        RequestStatus stateValue = RequestStatus.fromId(state);
         try (Transaction tx = persistence.getTransaction()) {
             Request request = persistence.getEntityManager().find(Request.class, entityId);
             if (request != null) {
-                request.setStatus(state);
+                request.setStatus(stateValue);
             }
             tx.commit();
         }

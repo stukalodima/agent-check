@@ -1,51 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://browseCaption"
-        focusComponent="questionsTable"
-        messagesPack="com.company.agentcheck.web.screens.question">
+        focusComponent="answersTable"
+        messagesPack="com.company.agentcheck.web.screens.answer">
     <data readOnly="true">
-        <collection id="questionsDc"
-                    class="com.company.agentcheck.entity.Question"
+        <collection id="answersDc"
+                    class="com.company.agentcheck.entity.Answer"
                     view="_local">
-            <loader id="questionsDl">
+            <loader id="answersDl">
                 <query>
-                    <![CDATA[select e from agentcheck_Question e]]>
+                    <![CDATA[select e from agentcheck_Answer e]]>
                 </query>
             </loader>
         </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="questionsTable"
+    <layout expand="answersTable"
             spacing="true">
         <filter id="filter"
-                applyTo="questionsTable"
-                dataLoader="questionsDl">
+                applyTo="answersTable"
+                dataLoader="answersDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="questionsTable"
+        <groupTable id="answersTable"
                     width="100%"
-                    dataContainer="questionsDc">
+                    dataContainer="answersDc">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
                 <action id="refresh" type="refresh"/>
-                <action id="excel" type="excel"/>
             </actions>
             <columns>
+                <column id="docDate"/>
+                <column id="number"/>
                 <column id="vidProverki"/>
-                <column id="name"/>
-                <column id="price"/>
+                <column id="client"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="questionsTable.create"/>
-                <button id="editBtn" action="questionsTable.edit"/>
-                <button id="removeBtn" action="questionsTable.remove"/>
-                <button id="refreshBtn" action="questionsTable.refresh"/>
-                <button id="excelBtn" action="questionsTable.excel"/>
+                <button id="createBtn" action="answersTable.create"/>
+                <button id="editBtn" action="answersTable.edit"/>
+                <button id="removeBtn" action="answersTable.remove"/>
+                <button id="refreshBtn" action="answersTable.refresh"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

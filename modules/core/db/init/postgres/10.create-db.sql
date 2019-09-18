@@ -12,7 +12,7 @@ create table AGENTCHECK_REQUEST (
     NUMBER_ varchar(9) not null,
     RESULT_ double precision,
     DOC_DATE timestamp not null,
-    STATUS varchar(255),
+    STATUS integer,
     CEL_PROVERKI integer not null,
     VID_PROVERKI integer not null,
     AGENT_NAME varchar(255) not null,
@@ -41,7 +41,48 @@ create table AGENTCHECK_QUESTION (
     --
     NAME text not null,
     PRICE double precision not null,
+    VID_PROVERKI integer not null,
     --
     primary key (ID)
 )^
 -- end AGENTCHECK_QUESTION
+-- begin AGENTCHECK_ANSWER
+create table AGENTCHECK_ANSWER (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    DOC_DATE timestamp not null,
+    NUMBER_ varchar(11),
+    USER_ID uuid,
+    REQUEST_ID uuid,
+    VID_PROVERKI integer not null,
+    CLIENT varchar(255),
+    --
+    primary key (ID)
+)^
+-- end AGENTCHECK_ANSWER
+-- begin AGENTCHECK_ANSWER_LINE
+create table AGENTCHECK_ANSWER_LINE (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    ANSWER_ID uuid not null,
+    QUESTION_ID uuid,
+    PRICE double precision not null,
+    VALUE_ boolean,
+    --
+    primary key (ID)
+)^
+-- end AGENTCHECK_ANSWER_LINE

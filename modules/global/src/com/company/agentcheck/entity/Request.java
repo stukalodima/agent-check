@@ -2,6 +2,10 @@ package com.company.agentcheck.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.cuba.core.entity.annotation.Lookup;
+import com.haulmont.cuba.core.entity.annotation.LookupType;
+import com.haulmont.cuba.core.entity.annotation.OnDelete;
+import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -26,7 +30,7 @@ public class Request extends StandardEntity {
     protected Date docDate;
 
     @Column(name = "STATUS")
-    protected String status;
+    protected Integer status;
 
     @NotNull
     @Column(name = "CEL_PROVERKI", nullable = false)
@@ -66,20 +70,33 @@ public class Request extends StandardEntity {
     @Column(name = "DETAIL")
     protected String detail;
 
+    @Lookup(type = LookupType.SCREEN, actions = {"open"})
+    @OnDelete(DeletePolicy.CASCADE)
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "request")
+    protected Answer answer;
+
+    public void setStatus(RequestStatus status) {
+        this.status = status == null ? null : status.getId();
+    }
+
+    public RequestStatus getStatus() {
+        return status == null ? null : RequestStatus.fromId(status);
+    }
+
+    public Answer getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(Answer answer) {
+        this.answer = answer;
+    }
+
     public Double getResult() {
         return result;
     }
 
     public void setResult(Double result) {
         this.result = result;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public Date getDocDate() {

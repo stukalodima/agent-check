@@ -6,7 +6,7 @@
     <data>
         <instance id="requestDc"
                   class="com.company.agentcheck.entity.Request"
-                  view="_local">
+                  view="request-view">
             <loader id = "requestDl"/>
         </instance>
         <collection id="procAttachmentsDc"
@@ -44,13 +44,22 @@
                     <textField id="statusField" property="status" editable="false"/>
                 </column>
             </form>
-            <groupBox caption="msg://attachments"
-                      height="300px"
+            <hbox width="100%" expand="form1">
+                <form id="form1" dataContainer="requestDc" width="100%">
+                    <column width="100%">
+                        <pickerField id="answerField" property="answer" width="100%">
+                            <actions/>
+                        </pickerField>
+                    </column>
+                </form>
+                <button id="createAnswer" width="100px" caption="msg://createAnswer"
+                        invoke="onCreateAnswerClick"/>
+            </hbox>
+            <groupBox id="gbAttachments" caption="msg://attachments"
                       spacing="true"
-                      width="100%">
+                      width="100%" collapsable="true" collapsed="true" expand="attachmentsTable">
                 <table id="attachmentsTable"
                        dataContainer="procAttachmentsDc"
-                       height="100%"
                        width="100%">
                     <columns>
                         <column id="file.name"/>
@@ -65,7 +74,7 @@
                       caption="msg://tasks"
                       spacing="true"
                       width="100%"
-                      orientation="vertical">
+                      orientation="vertical" expand="procTasksFrame" collapsable="true" collapsed="true">
                 <fragment id="procTasksFrame"
                           screen="procTasksFrame"/>
             </groupBox>
@@ -73,7 +82,7 @@
                       caption="msg://process"
                       spacing="true"
                       width="100%"
-                      orientation="vertical">
+                      orientation="vertical" expand="procActionsFragment">
                 <fragment id="procActionsFragment"
                           screen="bpm_ProcActionsFragment"/>
             </groupBox>

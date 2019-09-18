@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.company.agentcheck.web.screens.answerline">
+    <data>
+        <instance id="answerLineDc"
+                  class="com.company.agentcheck.entity.AnswerLine"
+                  view="answerLine-view-withquestion">
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="AUTO"
+                width="AUTO"
+                modal="true"
+                forceDialog="true"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="answerLineDc">
+            <column width="250px">
+                <textField id="priceField" property="price" visible="false"/>
+                <checkBox id="valueField" property="value" visible="false"/>
+                <pickerField id="questionField" property="question"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

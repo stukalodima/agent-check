@@ -4,5 +4,7 @@
 
         <class>com.company.agentcheck.entity.Request</class>
         <class>com.company.agentcheck.entity.Question</class>
+        <class>com.company.agentcheck.entity.Answer</class>
+        <class>com.company.agentcheck.entity.AnswerLine</class>
     </persistence-unit>
 </persistence>

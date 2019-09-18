@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
 
-    <view entity="agentcheck_Request" name="request-view" extends="_local"/>
+    <view entity="agentcheck_Request" name="request-view" extends="_local">
+        <property name="answer" view="answer-view-with-lines"/>
+    </view>
     <view class="com.haulmont.bpm.entity.ProcInstance" name="procInstance-listener-view" extends="_local">
         <property name="procDefinition" view="_minimal">
             <property name="procRoles" view="_minimal"/>
         </property>
+    </view>
+    <view entity="agentcheck_Answer" name="answer-view-with-lines" extends="_local">
+        <property name="lines" view="_local">
+            <property name="question" view="_local"/>
+        </property>
+    </view>
+    <view entity="agentcheck_AnswerLine" name="answerLine-view-withquestion" extends="_local">
+        <property name="question" view="_local"/>
     </view>
 </views>

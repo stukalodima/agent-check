@@ -24,6 +24,18 @@ public class Question extends StandardEntity {
     @Column(name = "PRICE", nullable = false)
     protected Double price;
 
+    @NotNull
+    @Column(name = "VID_PROVERKI", nullable = false)
+    protected java.lang.Integer vidProverki;
+
+    public ViduProverki getVidProverki() {
+        return vidProverki == null ? null : ViduProverki.fromId(vidProverki);
+    }
+
+    public void setVidProverki(ViduProverki vidProverki) {
+        this.vidProverki = vidProverki == null ? null : vidProverki.getId();
+    }
+
     public Double getPrice() {
         return price;
     }
