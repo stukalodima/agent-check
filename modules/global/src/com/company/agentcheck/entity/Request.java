@@ -6,6 +6,7 @@ import com.haulmont.cuba.core.entity.annotation.Lookup;
 import com.haulmont.cuba.core.entity.annotation.LookupType;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
+import com.haulmont.cuba.security.entity.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -74,6 +75,40 @@ public class Request extends StandardEntity {
     @OnDelete(DeletePolicy.CASCADE)
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "request")
     protected Answer answer;
+
+    @Column(name = "JUR_FIZ")
+    protected Integer jurFiz;
+
+    @Column(name = "REZ_NEREZ")
+    protected Integer rezNerez;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "AUTOR_ID")
+    protected User autor;
+
+    public User getAutor() {
+        return autor;
+    }
+
+    public void setAutor(User autor) {
+        this.autor = autor;
+    }
+
+    public RezNerez getRezNerez() {
+        return rezNerez == null ? null : RezNerez.fromId(rezNerez);
+    }
+
+    public void setRezNerez(RezNerez rezNerez) {
+        this.rezNerez = rezNerez == null ? null : rezNerez.getId();
+    }
+
+    public JurFiz getJurFiz() {
+        return jurFiz == null ? null : JurFiz.fromId(jurFiz);
+    }
+
+    public void setJurFiz(JurFiz jurFiz) {
+        this.jurFiz = jurFiz == null ? null : jurFiz.getId();
+    }
 
     public void setStatus(RequestStatus status) {
         this.status = status == null ? null : status.getId();

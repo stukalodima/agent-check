@@ -62,11 +62,10 @@
                        dataContainer="procAttachmentsDc"
                        width="100%">
                     <columns>
-                        <column id="file.name"/>
+                        <column id="file.name" caption="mainMsg://com.haulmont.bpm.entity/ProcAttachment.file.name"/>
                         <column id="author"/>
                         <column id="type"/>
-                        <column id="comment"
-                                maxTextLength="50"/>
+                        <column id="comment" maxTextLength="50"/>
                     </columns>
                 </table>
             </groupBox>
@@ -90,7 +89,7 @@
         <hbox id="editActions" spacing="true">
             <button action="windowCommitAndClose"/>
             <button action="windowClose"/>
-            <button id="reportButton" icon="PRINT"/>
+            <button id="reportButton" icon="PRINT" caption="mainMsg://actions.Report"/>
         </hbox>
     </layout>
 </window>

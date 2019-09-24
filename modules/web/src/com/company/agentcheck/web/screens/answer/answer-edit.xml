@@ -33,19 +33,12 @@
         </form>
         <groupBox id="linesBox">
             <table id="linesTable" dataContainer="linesDc" width="100%" editable="true">
-                <actions>
-                    <action id="create" type="create"/>
-                    <action id="remove" type="remove"/>
-                </actions>
+                <actions/>
                 <columns>
                     <column id="question"/>
                     <column id="price" visible="false"/>
                     <column id="value" editable="true"/>
                 </columns>
-                <buttonsPanel>
-                    <button action="linesTable.create"/>
-                    <button action="linesTable.remove"/>
-                </buttonsPanel>
             </table>
         </groupBox>
         <hbox id="editActions" spacing="true">

@@ -1,9 +1,6 @@
 package com.company.agentcheck.web.screens.request;
 
-import com.company.agentcheck.entity.Answer;
-import com.company.agentcheck.entity.AnswerLine;
-import com.company.agentcheck.entity.Request;
-import com.company.agentcheck.entity.RequestStatus;
+import com.company.agentcheck.entity.*;
 import com.company.agentcheck.web.screens.answer.AnswerEdit;
 import com.haulmont.bpm.entity.ProcActor;
 import com.haulmont.bpm.entity.ProcAttachment;
@@ -94,6 +91,36 @@ public class RequestEdit extends StandardEditor<Request> {
         event.getEntity().setNumber(formattedNumber);
         event.getEntity().setStatus(RequestStatus.DRAFT);
         event.getEntity().setDocDate(new Date());
+        event.getEntity().setCountry("Україна");
+        event.getEntity().setAutor(userSession.getUser());
+    }
+
+    @Subscribe("celProverkiField")
+    private void onCelProverkiFieldValueChange(HasValue.ValueChangeEvent<CeliProverki> event) {
+        CeliProverki val = event.getValue();
+        if (val == CeliProverki.CANDIDAT || val == CeliProverki.JURRESIDENT || val == CeliProverki.SPD){
+            getEditedEntity().setCountry("Україна");
+        } else {
+            getEditedEntity().setCountry("");
+        }
+        switch (val) {
+            case CANDIDAT: {
+                getEditedEntity().setJurFiz(JurFiz.FIZ);
+                getEditedEntity().setRezNerez(RezNerez.REZ);
+            }
+            case SPD: {
+                getEditedEntity().setJurFiz(JurFiz.FIZ);
+                getEditedEntity().setRezNerez(RezNerez.REZ);
+            }
+            case JURRESIDENT: {
+                getEditedEntity().setJurFiz(JurFiz.JUR);
+                getEditedEntity().setRezNerez(RezNerez.REZ);
+            }
+            case JURNOTRESIDENT: {
+                getEditedEntity().setJurFiz(JurFiz.JUR);
+                getEditedEntity().setRezNerez(RezNerez.NEREZ);
+            }
+        }
     }
 
     private void changeStartProcessBtnCaption() {
@@ -145,11 +172,14 @@ public class RequestEdit extends StandardEditor<Request> {
                     return false;
                 })
                 .setBeforeCompleteTaskPredicate(()->{
-                    if (getEditedEntity().getAnswer() != null){
+                    if (getEditedEntity().getStatus() != RequestStatus.PROCESS){
                         return true;
                     }
+                    if (getEditedEntity().getAnswer() == null){
                     notifications.create().withCaption("УВАГА!!!").withDescription("Потрібно провести перевірку").show();
                     return false;
+                    }
+                    return true;
                 })
                 .setAfterCompleteTaskListener(()->{
                     requestDl.load();

@@ -24,6 +24,9 @@ create table AGENTCHECK_REQUEST (
     CONTRACT_SUMM varchar(255),
     CONTRACT_TYPE varchar(255),
     DETAIL text,
+    JUR_FIZ integer,
+    REZ_NEREZ integer,
+    AUTOR_ID uuid,
     --
     primary key (ID)
 )^
