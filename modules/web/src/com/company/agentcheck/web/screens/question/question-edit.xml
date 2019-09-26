@@ -20,10 +20,11 @@
         </form>
         <form id="form1" dataContainer="questionDc" width="100%">
             <column width="100%">
+                <lookupField id="vidProverkiField" property="vidProverki" width="100%"/>
                 <textField id="priceField" property="price" width="100%"/>
             </column>
             <column width="100%">
-                <lookupField id="vidProverkiField" property="vidProverki" width="100%"/>
+                <lookupField id="celProverkiField" property="celProverki" width="100%"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

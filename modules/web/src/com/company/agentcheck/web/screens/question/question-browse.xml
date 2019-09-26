@@ -35,6 +35,7 @@
             </actions>
             <columns>
                 <column id="vidProverki"/>
+                <column id="celProverki"/>
                 <column id="name"/>
                 <column id="price"/>
             </columns>

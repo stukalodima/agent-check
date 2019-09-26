@@ -54,6 +54,17 @@ public class Answer extends StandardEntity {
     @OneToMany(mappedBy = "answer", cascade = CascadeType.PERSIST)
     protected List<AnswerLine> lines;
 
+    @Column(name = "CEL_PROVERKI")
+    protected Integer celProverki;
+
+    public CeliProverki getCelProverki() {
+        return celProverki == null ? null : CeliProverki.fromId(celProverki);
+    }
+
+    public void setCelProverki(CeliProverki celProverki) {
+        this.celProverki = celProverki == null ? null : celProverki.getId();
+    }
+
     public User getUser() {
         return user;
     }

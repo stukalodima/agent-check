@@ -22,44 +22,49 @@ public class AgentTaskListener implements TaskListener {
 
     private Expression emailSubject;
     private Expression emailBody;
-    private Expression reportSend;
+//    private Expression reportSend;
 
     @Override
     public void notify(DelegateTask delegateTask) {
         String emailSubjectValue = (String) emailSubject.getValue(delegateTask);
         String emailBodyValue = (String) emailBody.getValue(delegateTask);
-        String reportSendString = "";
-
-        try {
-            reportSendString = (String) reportSend.getValue(delegateTask);
-        } finally {
-            reportSendString = "";
-        }
+//        String reportSendString = "";
+//
+//        try {
+//            reportSendString = (String) reportSend.getValue(delegateTask);
+//        } finally {
+//            reportSendString = "";
+//        }
 
         DataManager dataManager = AppBeans.get(DataManager.class);
         Set<IdentityLink> users = delegateTask.getCandidates();
         EmailerAPI emailerAPI = AppBeans.get(EmailerAPI.class);
 
 
-        String procId = delegateTask.getProcessInstanceId();
-        if (!procId.isEmpty()) {
-            ProcInstance procInstance = dataManager.load(ProcInstance.class)
-                    .query("select p from bpm$ProcInstance p where p.id = :id")
-                    .parameter("id", procId)
-                    .one();
-
-            UUID requestID = null;
-            if (procInstance != null) {
-                requestID = procInstance.getEntity().getEntityId();
-                Request request = dataManager.load(LoadContext.create(Request.class).setId(requestID).setView(View.LOCAL));
-
-                emailSubjectValue = emailSubjectValue.replaceAll("%Контрагент%", request != null ? request.getAgentName() : "");
-                emailBodyValue = emailBodyValue.replaceAll("%Контрагент%", request != null ? request.getAgentName() : "");
-                emailBodyValue = emailBodyValue.replaceAll("%ВидПроверки%", request != null ? request.getAgentName() : "");
-                emailBodyValue = emailBodyValue.replaceAll("%ЦельПроверки%", request != null ? request.getAgentName() : "");
-                emailBodyValue = emailBodyValue.replaceAll("%НазваниеПроверки%", request != null ? request.getAgentName() : "");
-            }
-        }
+//        String procId = delegateTask.getProcessInstanceId();
+//        if (!procId.isEmpty()) {
+//
+//            String qryProc = "select p from bpm$ProcInstance p " +
+//                    "where p.act_process_instance_id = '"+procId+"' ";
+//            ProcInstance procInstance = dataManager.load(LoadContext.create(ProcInstance.class).setQuery(LoadContext.createQuery(qryProc)));
+//
+////            ProcInstance procInstance = dataManager.load(ProcInstance.class)
+////                    .query("select p from bpm$ProcInstance p where p.id = :id")
+////                    .parameter("id", procId)
+////                    .one();
+//
+//            UUID requestID = null;
+//            if (procInstance != null) {
+//                requestID = procInstance.getEntity().getEntityId();
+//                Request request = dataManager.load(LoadContext.create(Request.class).setId(requestID).setView(View.LOCAL));
+//
+//                emailSubjectValue = emailSubjectValue.replaceAll("%Контрагент%", request != null ? request.getAgentName() : "");
+//                emailBodyValue = emailBodyValue.replaceAll("%Контрагент%", request != null ? request.getAgentName() : "");
+//                emailBodyValue = emailBodyValue.replaceAll("%ВидПроверки%", request != null ? request.getAgentName() : "");
+//                emailBodyValue = emailBodyValue.replaceAll("%ЦельПроверки%", request != null ? request.getAgentName() : "");
+//                emailBodyValue = emailBodyValue.replaceAll("%НазваниеПроверки%", request != null ? request.getAgentName() : "");
+//            }
+//        }
 
         if (users.isEmpty()) {
             String userStr = delegateTask.getAssignee();

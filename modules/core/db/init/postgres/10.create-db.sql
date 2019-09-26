@@ -27,6 +27,8 @@ create table AGENTCHECK_REQUEST (
     JUR_FIZ integer,
     REZ_NEREZ integer,
     AUTOR_ID uuid,
+    FACTORS text,
+    COLOR varchar(255),
     --
     primary key (ID)
 )^
@@ -45,6 +47,7 @@ create table AGENTCHECK_QUESTION (
     NAME text not null,
     PRICE double precision not null,
     VID_PROVERKI integer not null,
+    CEL_PROVERKI integer,
     --
     primary key (ID)
 )^
@@ -66,6 +69,7 @@ create table AGENTCHECK_ANSWER (
     REQUEST_ID uuid,
     VID_PROVERKI integer not null,
     CLIENT varchar(255),
+    CEL_PROVERKI integer,
     --
     primary key (ID)
 )^

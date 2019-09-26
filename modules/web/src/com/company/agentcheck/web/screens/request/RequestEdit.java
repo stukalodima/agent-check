@@ -236,12 +236,32 @@ public class RequestEdit extends StandardEditor<Request> {
         if (getEditedEntity().getAnswer() != null){
             List<AnswerLine> answerLines = dataManager.load(AnswerLine.class)
                     .query("select e from agentcheck_AnswerLine e where e.answer.id = :answerID")
+                    .view("answerLine-view-withquestion")
                     .parameter("answerID",getEditedEntity().getAnswer().getId()).list();
             double result = 1;
+            String factors = "";
             for (AnswerLine answerLine:answerLines){
-                result = result * answerLine.getPrice();
+                if (answerLine.getValue()) {
+//                answerLine = dataManager.reload(answerLine, View.LOCAL);
+                    result = result * answerLine.getPrice();
+                    Question question = dataManager.reload(answerLine.getQuestion(), View.LOCAL);
+                    factors = factors + question.getName() + "\n";
+                }
             }
             getEditedEntity().setResult(result);
+            getEditedEntity().setFactors(factors);
+            if (result == 0){
+                getEditedEntity().setColor("Чорний");
+            }
+            if (result >= 0.01 && result < 0.21){
+                getEditedEntity().setColor("Червоний");
+            }
+            if (result >= 0.21 && result < 0.8){
+                getEditedEntity().setColor("Жовтий");
+            }
+            if (result >= 0.81){
+                getEditedEntity().setColor("Зелений");
+            }
         }
     }
 
@@ -257,6 +277,7 @@ public class RequestEdit extends StandardEditor<Request> {
                 .withInitializer(answer -> {
                     answer.setClient(getEditedEntity().getAgentName());
                     answer.setVidProverki(getEditedEntity().getVidProverki());
+                    answer.setCelProverki(getEditedEntity().getCelProverki());
                     answer.setRequest(getEditedEntity());
                 })
                 .withScreenClass(AnswerEdit.class)

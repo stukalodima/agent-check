@@ -3,8 +3,8 @@ package com.company.agentcheck.web.screens.answer;
 import com.company.agentcheck.entity.Answer;
 import com.company.agentcheck.entity.AnswerLine;
 import com.company.agentcheck.entity.Question;
+import com.company.agentcheck.service.QuestionService;
 import com.haulmont.cuba.core.app.UniqueNumbersService;
-import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.EntityStates;
 import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.gui.model.CollectionPropertyContainer;
@@ -23,8 +23,6 @@ public class AnswerEdit extends StandardEditor<Answer> {
     @Inject
     private UniqueNumbersService uniqueNumbersService;
     @Inject
-    private DataManager dataManager;
-    @Inject
     private CollectionPropertyContainer<AnswerLine> linesDc;
     @Inject
     private Metadata metadata;
@@ -32,6 +30,8 @@ public class AnswerEdit extends StandardEditor<Answer> {
     private EntityStates entityStates;
     @Inject
     private UserSession userSession;
+    @Inject
+    private QuestionService questionService;
 
     @Subscribe
     private void onInitEntity(InitEntityEvent<Answer> event) {
@@ -50,7 +50,12 @@ public class AnswerEdit extends StandardEditor<Answer> {
     }
 
     private void fillAnswerLines() {
-        List<Question> list = dataManager.load(Question.class).query("select e from agentcheck_Question e").list();
+
+        List<Question> list = questionService.getQuestionList(getEditedEntity().getCelProverki().getId());
+//        List<Question> list = dataManager.load(Question.class).
+//                query("select e from agentcheck_Question e where e.cel_proverki = :celId")
+//                .parameter("", getEditedEntity().getCelProverki().getId().toString())
+//                .list();
 
         for (Question question:list){
             AnswerLine answerLine = metadata.create(AnswerLine.class);

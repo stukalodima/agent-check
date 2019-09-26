@@ -6,7 +6,7 @@
     <data readOnly="true">
         <collection id="requestsDc"
                     class="com.company.agentcheck.entity.Request"
-                    view="_local">
+                    view="request-list">
             <loader id="requestsDl">
                 <query>
                     <![CDATA[select e from agentcheck_Request e]]>
@@ -41,6 +41,7 @@
                 <column id="vidProverki"/>
                 <column id="agentName"/>
                 <column id="agentCode"/>
+                <column id="autor"/>
                 <column id="country"/>
                 <column id="jurAddress"/>
                 <column id="factAddress"/>

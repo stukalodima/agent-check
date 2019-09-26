@@ -86,6 +86,29 @@ public class Request extends StandardEntity {
     @JoinColumn(name = "AUTOR_ID")
     protected User autor;
 
+    @Lob
+    @Column(name = "FACTORS")
+    protected String factors;
+
+    @Column(name = "COLOR")
+    protected String color;
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getFactors() {
+        return factors;
+    }
+
+    public void setFactors(String factors) {
+        this.factors = factors;
+    }
+
     public User getAutor() {
         return autor;
     }

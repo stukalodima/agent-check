@@ -28,6 +28,17 @@ public class Question extends StandardEntity {
     @Column(name = "VID_PROVERKI", nullable = false)
     protected java.lang.Integer vidProverki;
 
+    @Column(name = "CEL_PROVERKI")
+    protected Integer celProverki;
+
+    public CeliProverki getCelProverki() {
+        return celProverki == null ? null : CeliProverki.fromId(celProverki);
+    }
+
+    public void setCelProverki(CeliProverki celProverki) {
+        this.celProverki = celProverki == null ? null : celProverki.getId();
+    }
+
     public ViduProverki getVidProverki() {
         return vidProverki == null ? null : ViduProverki.fromId(vidProverki);
     }

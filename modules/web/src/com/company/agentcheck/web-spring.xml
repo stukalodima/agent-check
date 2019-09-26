@@ -12,6 +12,7 @@
         <property name="remoteServices">
             <map>
                 <entry key="agentcheck_NumerationService" value="com.company.agentcheck.service.NumerationService"/>
+                <entry key="agentcheck_QuestionService" value="com.company.agentcheck.service.QuestionService"/>
             </map>
         </property>
     </bean>
